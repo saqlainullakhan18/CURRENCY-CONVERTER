@@ -1,0 +1,61 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Currency Converter</h1>
+<div>
+  <p>Amount: <input id="amount" type="number" value="0" /></p>
+  <p>From: <select id="source">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="INR">INR</option>
+  </select></p>
+  <p>To: <select id="target">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="INR">INR</option>
+  </select></p>
+  <p>Result: <span id="result">0</span></p>
+  <p><button id="convert">Convert</button></p>
+</div>
+<script>
+  // Get the elements from the HTML part
+  const amount = document.getElementById("amount");
+  const source = document.getElementById("source");
+  const target = document.getElementById("target");
+  const result = document.getElementById("result");
+  const convert = document.getElementById("convert");
+
+  // Define the exchange rates for each currency pair
+  const rates = {
+    "USD-USD": 1,
+    "USD-EUR": 0.85,
+    "USD-INR": 74.32,
+    "EUR-USD": 1.18,
+    "EUR-EUR": 1,
+    "EUR-INR": 87.42,
+    "INR-USD": 0.013,
+    "INR-EUR": 0.011,
+    "INR-INR": 1
+  };
+
+  // Define a function to convert the currency values
+  function convertCurrency() {
+    // Get the input values
+    let amountValue = parseFloat(amount.value);
+    let sourceValue = source.value;
+    let targetValue = target.value;
+
+    // Calculate the converted amount using the exchange rates
+    let rate = rates[sourceValue + "-" + targetValue];
+    let convertedAmount = amountValue * rate;
+
+    // Display the result with two decimal places
+    result.textContent = convertedAmount.toFixed(2);
+  }
+
+  // Add a function that will run when the convert button is clicked
+  convert.addEventListener("click", convertCurrency);
+</script>
+</body>
+</html>
